@@ -2,7 +2,7 @@ import throttle from 'lodash.throttle';
 
 const STORAGE_KEY = 'feedback-form-state';
 
-form = document.querySelector('.feedback-form');
+const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', throttle(onTextareaInput, 500));
 form.addEventListener('submit', onFormSubmit);
@@ -25,15 +25,18 @@ function populateTextarea() {
 
 function onFormSubmit(e) {
   e.preventDefault();
-  console.log({ email: email.value, message: message.value });
+  let formSubmit = {
+    email: email.value,
+    message: message.value,
+  }
 
   if (email.value === '' || message.value === '') {
     return alert('Будь-ласка, заповніть всі поля');
   }
-
+  console.log(formSubmit);
   localStorage.removeItem(STORAGE_KEY);
   e.currentTarget.reset();
-  formData = {};
+  formSubmit = {};
 }
 
 
